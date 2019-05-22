@@ -43,7 +43,7 @@ if (tmp == NULL) {
 }
 
 
-T pop2(Node_t **head) {
+T pop(Node_t **head) {
     Node_t *out;
     T value;
     if (*head == NULL) {
@@ -54,33 +54,6 @@ T pop2(Node_t **head) {
     value = out->value;
     free(out);
     return value;
-}
-
-
-T peek(const Node_t* head) {
-    if (head == NULL) {
-        exit(STACK_UNDERFLOW);
-    }
-    return head->value;
-}
-
-
-void printStack(const Node_t* head) {
-    printf("stack >");
-    while (head) {
-        printf("%d ", head->value);
-        head = head->next;
-    }
-}
-
-
-size_t getSize(const Node_t *head) {
-    size_t size = 0;
-    while (head) {
-        size++;
-        head = head->next;
-    }
-    return size;
 }
 
 
@@ -110,35 +83,35 @@ int main(void) {
         k = 5;
     push(&head, k);
     fclose(write);
-    n = pop2(&head);
+    n = pop(&head);
     if (n==0){
-        e = pop2(&head);
-        f = pop2(&head);
+        e = pop(&head);
+        f = pop(&head);
         fprintf(result,"Answer=%f", f+e);
     }
     if (n==1){
-            e = pop2(&head);
-            f = pop2(&head);
+            e = pop(&head);
+            f = pop(&head);
             fprintf(result,"Answer=%f", f-e);
         }
     if (n==2){
-            e = pop2(&head);
-            f = pop2(&head);
+            e = pop(&head);
+            f = pop(&head);
             fprintf(result,"Answer=%f", f*e);
         }
     if (n==3){
-            e = pop2(&head);
-            f = pop2(&head);
+            e = pop(&head);
+            f = pop(&head);
             fprintf(result,"Answer=%f", f/e);
         }
     if (n==4){
-            e = pop2(&head);
-            f = pop2(&head);
+            e = pop(&head);
+            f = pop(&head);
             fprintf(result,"Answer=%f", pow(f,e));
         }
     if (n==5){
-                e = pop2(&head);
-                f = pop2(&head);
+                e = pop(&head);
+                f = pop(&head);
                 fprintf(result,"Answer=%f", factorial(e));
             }
 }
