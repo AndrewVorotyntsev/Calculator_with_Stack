@@ -11,11 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <conio.h>
-#include <string.h>
-#define STACK_OVERFLOW  -100
-#define STACK_UNDERFLOW -101
-#define OUT_OF_MEMORY   -102
 
 
 float factorial(float n)
@@ -25,17 +20,15 @@ float factorial(float n)
 }
 
 
-typedef float T;
 typedef struct Node_tag {
-    T value;
+    float value;
     struct Node_tag *next;
 } Node_t;
 
 
-void push(Node_t **head, T value) {
+void push(Node_t **head, float value) {
     Node_t *tmp = malloc(sizeof(Node_t));
 if (tmp == NULL) {
-        exit(STACK_OVERFLOW);
     }
     tmp->next = *head;
     tmp->value = value;
@@ -43,11 +36,10 @@ if (tmp == NULL) {
 }
 
 
-T pop(Node_t **head) {
+float pop(Node_t **head) {
     Node_t *out;
-    T value;
+    float value;
     if (*head == NULL) {
-        exit(STACK_UNDERFLOW);
     }
     out = *head;
     *head = (*head)->next;
@@ -65,51 +57,37 @@ int main(void) {
     result = fopen("Result.txt" , "w");
     Node_t *head = NULL;
     char s;
-    float a, b, k, n, e, f;
-    fscanf(write ,"%f %f %c" , &a,&b,&s);
+    float a,b, e, f;
+    fscanf(write,"%f %f %c" , &a ,&b ,&s);
     push(&head, a);
     push(&head, b);
     if (s=='+')
-        k = 0;
-    if (s=='-')
-        k = 1;
-    if (s=='*')
-        k = 2;
-    if (s=='/')
-        k = 3;
-    if (s=='^')
-        k = 4;
-    if (s=='!')
-        k = 5;
-    push(&head, k);
-    fclose(write);
-    n = pop(&head);
-    if (n==0){
+    {
         e = pop(&head);
         f = pop(&head);
         fprintf(result,"Answer=%f", f+e);
     }
-    if (n==1){
+    if (s=='-'){
             e = pop(&head);
             f = pop(&head);
             fprintf(result,"Answer=%f", f-e);
         }
-    if (n==2){
+    if (s=='*'){
             e = pop(&head);
             f = pop(&head);
             fprintf(result,"Answer=%f", f*e);
         }
-    if (n==3){
+    if (s=='/'){
             e = pop(&head);
             f = pop(&head);
             fprintf(result,"Answer=%f", f/e);
         }
-    if (n==4){
+    if (s=='^'){
             e = pop(&head);
             f = pop(&head);
             fprintf(result,"Answer=%f", pow(f,e));
         }
-    if (n==5){
+    if (s=='!'){
                 e = pop(&head);
                 f = pop(&head);
                 fprintf(result,"Answer=%f", factorial(e));
